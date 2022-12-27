@@ -1,20 +1,38 @@
-﻿// maze-gen.cpp : Ten plik zawiera funkcję „main”. W nim rozpoczyna się i kończy wykonywanie programu.
-//
+﻿// Maze generator
+// Create a rectangle shaped maze with 1 entry and 1 exit. It is guaranteed that there is exactly 1 solution to get
+// from the entry to the exit
 
+using namespace std;
+
+
+#include <fstream>
 #include <iostream>
+#include <time.h>
+
+#include "canvas.h"
+#include "maze.h"
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	const int width = 121, height = 59;
+	srand((unsigned int)time(NULL));
+
+	Maze maze(0, 0, width, height);
+	maze.addRandomEntry(east);
+	maze.addRandomEntry(west);
+	maze.generate();
+
+	// draw to console
+	//ASCIICanvas canvas(width, height);
+	//maze.draw(canvas);
+	//cout << canvas.toString();
+
+	// draw to HTML file
+	HTMLCanvas htmlCanvas(width, height);
+	maze.draw(htmlCanvas);
+	ofstream html;
+	html.open("maze.html");
+	html << htmlCanvas.toString();
+	html.close();
 }
 
-// Uruchomienie programu: Ctrl + F5 lub menu Debugowanie > Uruchom bez debugowania
-// Debugowanie programu: F5 lub menu Debugowanie > Rozpocznij debugowanie
-
-// Porady dotyczące rozpoczynania pracy:
-//   1. Użyj okna Eksploratora rozwiązań, aby dodać pliki i zarządzać nimi
-//   2. Użyj okna programu Team Explorer, aby nawiązać połączenie z kontrolą źródła
-//   3. Użyj okna Dane wyjściowe, aby sprawdzić dane wyjściowe kompilacji i inne komunikaty
-//   4. Użyj okna Lista błędów, aby zobaczyć błędy
-//   5. Wybierz pozycję Projekt > Dodaj nowy element, aby utworzyć nowe pliki kodu, lub wybierz pozycję Projekt > Dodaj istniejący element, aby dodać istniejące pliku kodu do projektu
-//   6. Aby w przyszłości ponownie otworzyć ten projekt, przejdź do pozycji Plik > Otwórz > Projekt i wybierz plik sln
