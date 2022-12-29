@@ -14,7 +14,7 @@ using namespace std;
 
 int main()
 {
-	const int width = 121, height = 59;
+	const int width = 181, height = 87;
 	srand((unsigned int)time(NULL));
 
 	Maze maze(0, 0, width, height);

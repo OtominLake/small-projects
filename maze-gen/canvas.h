@@ -44,6 +44,7 @@ public:
 class HTMLCanvas : public ASCIICanvas {
 private:
 	const static string cellSize;
+	const static string wallSize;
 public:
 	HTMLCanvas(int _w, int _h);
 	string toString();

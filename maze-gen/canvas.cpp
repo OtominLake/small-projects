@@ -76,16 +76,21 @@ HTMLCanvas::HTMLCanvas(int _w, int _h) : ASCIICanvas(_w, _h) {
 }
 
 const string HTMLCanvas::cellSize = "12px";
+const string HTMLCanvas::wallSize = "4px";
 
 string HTMLCanvas::toString() {
 	string output = "<html>\n<head>\n<style>\n";
-	output += ".full  { background-color: black; }\n";
-	output += ".empty { background-color: white; }\n";
-	output += "td	  { width: " + cellSize + "; height: " + cellSize + "; padding : 0; margin : 0; empty - cells: show; }\n";
-	output += "td div { width: " + cellSize + "; height: " + cellSize + "; overflow: hidden; }\n";
-	output += "table  { table-layout : fixed; border-collapse: collapse; padding : 0; margin : auto; }\n";
-	output += "</style>\n</head>\n";
-	output += "<body>\n<table>\n";
+		output += ".full  { background-color: black; }\n";
+		output += ".empty { background-color: white; }\n";
+		output += "td {width: " + cellSize + "; height: " + cellSize + "; padding : 0; margin : 0; empty-cells: show; }";
+		output += "td div{ width: " + cellSize + "; height: " + cellSize + "px; overflow: hidden; }";
+		output += "tr:nth-child(odd) td { height: " + wallSize + "; }";
+		output += "tr:nth-child(odd) td div { height: " + wallSize + "; }";
+		output += "td:nth-child(odd) { width: " + wallSize + "; }";
+		output += "td:nth-child(odd) div { width: " + wallSize + "; }";
+		output += "table { table-layout : fixed; border-collapse: collapse; padding : 0; margin: auto; }";
+		output += "</style>\n</head>\n";
+		output += "<body>\n<table>\n";
 
 	// Reset pointer
 	setPointer(0, 0);
